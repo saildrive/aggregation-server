@@ -1,0 +1,66 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.1"
+  title: Sea Drive
+  description: Interface with the Sea Drive API to control and monitor boat systems and instrumentation.
+
+paths:
+  /lights:
+    get:
+      description:  Gets all Light objects.
+      responses:
+        "200":
+          description: Successfully retrieved Lights
+          schema:
+            title: ArrayOfLights
+            type: array
+            items:
+              $ref: "#/definitions/Light"
+  /lights/{lightId}:
+    get:
+      description: Get a Light object.
+      parameters:
+        - in: path
+          name: lightId
+          description: ID of the light fixture to retrieve
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved a Light
+          schema:
+            $ref: "#/definitions/Light"
+        "404":
+          description: Light not found
+    post:
+      description: Update a Light object.
+      parameters:
+        - in: path
+          name: lightId
+          description: ID of the light fixture to be updated
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successfully updated the Light
+          schema:
+            $ref: "#/definitions/Light"
+        "404":
+          description: Light not found
+        "400":
+          description: Invalid update parameters
+definitions:
+  Light:
+    description: A light fixture object
+    type: object
+    properties:
+      id:
+        type: string
+        description: The database ID of the Light
+      name:
+        type: string
+        description: The human friendly name of the Light
+      dimmer:
+        type: number
+        description: The percent power setting of the Light

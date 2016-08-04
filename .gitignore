@@ -1,2 +1,4 @@
 /.idea/
 /Sea Drive Server.iml
+/venv/
+.DS_Store
